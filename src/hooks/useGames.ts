@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient, { CanceledError } from "../services/api-client";
-import gameDataDummy from "../components/sections/game-data-dummy";
+import gameDataDummy from "../components/game-card/game-data-dummy";
 
 export interface IPlatform {
   id: number;
