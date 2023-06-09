@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import apiClient, { CanceledError } from "../services/api-client";
 
-interface IGame {
+export interface IGame {
   id: number;
   name: string;
+  background_image: string;
 }
 
-interface IFetchGamesResponse {
+export interface IFetchGamesResponse {
   count: number;
   results: IGame[];
 }
@@ -24,7 +25,7 @@ export default function useGames() {
         if (err instanceof CanceledError) return;
         setError(err.message);
       });
-    return () => controller.abort(); //about if moving from page
+    return () => controller.abort(); //abort if moving from page
   }, []);
   return { games, error };
 }
