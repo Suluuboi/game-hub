@@ -1,10 +1,9 @@
-import { list } from "@chakra-ui/react";
 import useGenres from "../../hooks/useGenres";
 
 interface Props {}
 
 export default function GenreList({}: Props) {
-  const { genres, error, loading } = useGenres();
+  const { data: genres, error, loading } = useGenres();
   return (
     <>
       <ul>

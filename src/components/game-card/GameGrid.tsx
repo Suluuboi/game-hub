@@ -7,7 +7,7 @@ import GameCardSkeleton from "../game-card/GameCardSkeleton";
 import GameCardContainer from "../game-card/GameCardContainer";
 
 export default function GameGrid() {
-  const { games, error, loading } = useGames();
+  const { data: games, error, loading } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>
