@@ -6,13 +6,13 @@ import { useState } from "react";
 import { IGenre } from "./hooks/useGenres";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<IGenre| null>(null)
+  const [selectedGenre, setSelectedGenre] = useState<IGenre | null>(null);
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       templateColumns={{
-        base: '1fr',
-        lg:'200px'
+        base: "1fr",
+        lg: "200px",
       }}
     >
       <GridItem area={"nav"}>
@@ -20,7 +20,10 @@ function App() {
       </GridItem>
       <Show above={"lg"}>
         <GridItem area={"aside"} padding={5}>
-          <GenreList onSelectGenre={setSelectedGenre}/>
+          <GenreList
+            onSelectGenre={setSelectedGenre}
+            selectedGenre={selectedGenre}
+          />
         </GridItem>
       </Show>
 

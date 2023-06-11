@@ -7,9 +7,10 @@ import { Button } from "@chakra-ui/button";
 
 interface Props {
   onSelectGenre: (genre: IGenre) => void;
+  selectedGenre: IGenre | null;
 }
 
-export default function GenreList({ onSelectGenre }: Props) {
+export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
   const { data: genres, error, loading } = useGenres();
 
   return (
@@ -26,6 +27,7 @@ export default function GenreList({ onSelectGenre }: Props) {
                 borderRadius={8}
               />
               <Button
+                fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
                 variant={"link"}
                 fontSize={"lg"}
                 onClick={() => onSelectGenre(g)}
