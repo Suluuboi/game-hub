@@ -5,6 +5,7 @@ import getCropedImageUrl from "../../services/image-url";
 import { Spinner } from "@chakra-ui/spinner";
 import { Button } from "@chakra-ui/button";
 import { Heading } from "@chakra-ui/react";
+import genreDummyData from "./genre-dummy-data";
 
 interface Props {
   onSelectGenre: (genre: IGenre) => void;
@@ -12,11 +13,17 @@ interface Props {
 }
 
 export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
-  const { data: genres, error, loading } = useGenres();
+  const {
+    data: genres,
+    error,
+    loading,
+  } = { data: genreDummyData.genre_dummy.results, loading: false, error: null }; //useGenres();
 
   return (
     <>
-      <Heading fontSize={'2xl'} marginBottom={3}>Genres</Heading>
+      <Heading fontSize={"2xl"} marginBottom={3}>
+        Genres
+      </Heading>
       {error && null}
       {loading && <Spinner />}
       <List>
