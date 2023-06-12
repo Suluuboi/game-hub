@@ -4,6 +4,7 @@ import { Image } from "@chakra-ui/image";
 import getCropedImageUrl from "../../services/image-url";
 import { Spinner } from "@chakra-ui/spinner";
 import { Button } from "@chakra-ui/button";
+import { Heading } from "@chakra-ui/react";
 
 interface Props {
   onSelectGenre: (genre: IGenre) => void;
@@ -15,6 +16,7 @@ export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
 
   return (
     <>
+      <Heading fontSize={'2xl'} marginBottom={3}>Genres</Heading>
       {error && null}
       {loading && <Spinner />}
       <List>
@@ -23,11 +25,14 @@ export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
             <HStack>
               <Image
                 boxSize="32px"
+                objectFit={"cover"}
                 src={getCropedImageUrl(g.image_background).toString()}
                 borderRadius={8}
               />
               <Button
                 fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
+                whiteSpace={"normal"}
+                textAlign={"left"}
                 variant={"link"}
                 fontSize={"lg"}
                 onClick={() => onSelectGenre(g)}
