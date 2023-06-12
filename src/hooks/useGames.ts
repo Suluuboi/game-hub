@@ -1,6 +1,5 @@
 import { IGameQuery } from "../App";
 import useData from "./useData";
-import { IGenre } from "./useGenres";
 
 export interface IPlatform {
   id: number;
@@ -24,6 +23,7 @@ const useGames = (gameQury: IGameQuery) =>
         genres: gameQury.genre?.id,
         platforms: gameQury.platform?.id,
         ordering: gameQury.sortOrder,
+        search: gameQury.search,
       },
     },
     [gameQury]
