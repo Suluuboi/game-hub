@@ -3,6 +3,7 @@
  * the https://api.rawg.io/api api alow users to get croped images
  */
 export default function getCropedImageUrl(url: string) {
+  if (!url) return "";
   const target = "media/";
   const index = url.indexOf(target) + target.length;
   return url.slice(0, index) + "crop/600/400/" + url.slice(index);

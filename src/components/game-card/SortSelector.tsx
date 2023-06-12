@@ -5,32 +5,44 @@ import usePlatform from "../../hooks/usePlatforms";
 import { Spinner } from "@chakra-ui/spinner";
 import { IPlatform } from "../../hooks/useGames";
 
-interface Props {
-  //onSortSelected: (platform: IPlatform) => void;
-  //selectedPlatform: IPlatform | null;
+interface IOrder {
+  value: string;
+  label: string;
 }
 
-export default function SortSelector({}: //onSortSelected,
-//selectedPlatform,
-Props) {
-  const { data: platforms, error, loading } = usePlatform();
+interface Props {
+  onSortSelected: (sortOrder: string) => void;
+  selectedOrder: string | null;
+}
 
+export default function SortSelector({ onSortSelected, selectedOrder }: Props) {
+  const sortOrder = [
+    { value: "", label: "Relevence" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release date" },
+    { value: "-added", label: "Date added" },
+    { value: "created", label: "Created" },
+    { value: "updated", label: "Updated" },
+    { value: "-rating", label: "Average rating" },
+    { value: "metacritic", label: "Popularity" },
+  ];
+
+  const label = sortOrder.filter((order) => order.value === selectedOrder);
   return (
     <>
-      {error && null}
-      {loading && <Spinner />}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          {/*selectedPlatform ? selectedPlatform.name : "Platforms"*/}
-          Order By: Relevence
+          Sort by: {label[0]?.label || "Relevence"}
         </MenuButton>
         <MenuList>
-          <MenuItem>Relevence</MenuItem>
-          <MenuItem>Date added</MenuItem>
-          <MenuItem>Name</MenuItem>
-          <MenuItem>Release Date</MenuItem>
-          <MenuItem>Popularity</MenuItem>
-          <MenuItem>Average rating</MenuItem>
+          {sortOrder.map((order) => (
+            <MenuItem
+              key={order.label}
+              onClick={() => onSortSelected(order.value)}
+            >
+              {order.label}
+            </MenuItem>
+          ))}
         </MenuList>
       </Menu>
     </>

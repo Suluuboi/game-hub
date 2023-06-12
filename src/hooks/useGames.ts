@@ -20,7 +20,11 @@ const useGames = (gameQury: IGameQuery) =>
   useData<IGame>(
     "/games",
     {
-      params: { genres: gameQury.genre?.id, platforms: gameQury.platform?.id },
+      params: {
+        genres: gameQury.genre?.id,
+        platforms: gameQury.platform?.id,
+        ordering: gameQury.sortOrder,
+      },
     },
     [gameQury]
   );
