@@ -3,11 +3,11 @@ import NavBar from "./components/navigation/NavBar";
 import GameGrid from "./components/game-card/GameGrid";
 import GenreList from "./components/side-filter/GenreList";
 import { useState } from "react";
-import { IGenre } from "./hooks/useGenres";
 import PlatformSelector from "./components/game-card/PlatformSelector";
 import { IPlatform } from "./hooks/useGames";
 import SortSelector from "./components/game-card/SortSelector";
 import GameHeading from "./components/game-card/GameHeading";
+import { IGenre } from "./services/genreService";
 
 export interface IGameQuery {
   genre: IGenre | null;
@@ -39,9 +39,9 @@ function App() {
       </Show>
 
       <GridItem area={"main"}>
-        <Box paddingLeft={2} >
+        <Box paddingLeft={2}>
           <GameHeading gameQuery={gameQuery} />
-          <HStack spacing={5} marginBottom={5} >
+          <HStack spacing={5} marginBottom={5}>
             <PlatformSelector
               selectedPlatform={gameQuery.platform}
               onPlatformSelected={(platform) =>

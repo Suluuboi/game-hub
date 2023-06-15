@@ -1,11 +1,12 @@
 import { HStack, List, ListItem } from "@chakra-ui/layout";
-import useGenres, { IGenre } from "../../hooks/useGenres";
+import useGenres from "../../hooks/useGenres";
 import { Image } from "@chakra-ui/image";
 import getCropedImageUrl from "../../services/image-url";
 import { Spinner } from "@chakra-ui/spinner";
 import { Button } from "@chakra-ui/button";
 import { Heading } from "@chakra-ui/react";
 import genreDummyData from "./genre-dummy-data";
+import { IGenre } from "../../services/genreService";
 
 interface Props {
   onSelectGenre: (genre: IGenre) => void;
@@ -13,11 +14,12 @@ interface Props {
 }
 
 export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
-  const {
+  /*const {
     data: genres,
     error,
     loading,
-  } = { data: genreDummyData.genre_dummy.results, loading: false, error: null }; //useGenres();
+  } = { data: genreDummyData.genre_dummy.results, loading: false, error: null };*/
+  const { data: genres, error, isLoading: loading } = useGenres();
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
       {error && null}
       {loading && <Spinner />}
       <List>
-        {genres.map((g) => (
+        {genres?.results.map((g) => (
           <ListItem key={g.id} paddingY={"5px"}>
             <HStack>
               <Image
