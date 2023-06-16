@@ -1,32 +1,22 @@
+import { useQuery } from "@tanstack/react-query";
 import { IGameQuery } from "../App";
-import useData from "./useData";
+import gameService, { IGame } from "../services/gameServices";
+import { IFetchResponse } from "./useData";
+import { CACHE_KEY_GAMES } from "../services/constants";
 
-export interface IPlatform {
-  id: number;
-  name: string;
-  slug: string;
+function useGames(gameQury: IGameQuery) {
+  return useQuery<IFetchResponse<IGame>, Error>({
+    queryKey: [CACHE_KEY_GAMES, gameQury],
+    queryFn: () =>
+      gameService.getAll({
+        params: {
+          genres: gameQury.genre?.id,
+          parent_platforms: gameQury.platform?.id,
+          ordering: gameQury.sortOrder,
+          search: gameQury.search,
+        },
+      }),
+  });
 }
-
-export interface IGame {
-  id: number;
-  name: string;
-  background_image: string;
-  parent_platforms: { platform: IPlatform }[];
-  metacritic: number;
-}
-
-const useGames = (gameQury: IGameQuery) =>
-  useData<IGame>(
-    "/games",
-    {
-      params: {
-        genres: gameQury.genre?.id,
-        platforms: gameQury.platform?.id,
-        ordering: gameQury.sortOrder,
-        search: gameQury.search,
-      },
-    },
-    [gameQury]
-  );
 
 export default useGames;

@@ -9,7 +9,7 @@ export default function useGenres() {
   return useQuery<IFetchResponse<IGenre>, Error>({
     queryKey: [CACHE_KEY_GENRE],
     queryFn: genreClient.getAll,
-    staleTime: 24 * 60 * 60 * 1000, //1 day
-    initialData: genreDummyData.genre_dummy,
+    //staleTime: 24 * 60 * 60 * 1000, //1 day
+    //initialData: genreDummyData.genre_dummy,
   });
 }
