@@ -1,9 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
 import { BsChevronDown } from "react-icons/bs";
-import usePlatform from "../../hooks/usePlatforms";
-import { Spinner } from "@chakra-ui/spinner";
-import { IPlatform } from "../../hooks/useGames";
 
 interface IOrder {
   value: string;

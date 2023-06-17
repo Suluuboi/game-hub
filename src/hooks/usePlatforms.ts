@@ -1,8 +1,8 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import platformService, { IPlatform } from "../services/platformService";
-import useData, { IFetchResponse } from "./useData";
-import { CACHE_KEY_PLATFORMS } from "../services/constants";
 import platformDummyData from "../components/game-card/platform-dummy-data";
+import { IFetchResponse } from "../services/apiClient";
+import { CACHE_KEY_PLATFORMS } from "../services/constants";
 
 export default function usePlatform() {
   return useQuery<IFetchResponse<IPlatform>, Error>({

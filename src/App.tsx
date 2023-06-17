@@ -4,10 +4,10 @@ import GameGrid from "./components/game-card/GameGrid";
 import GenreList from "./components/side-filter/GenreList";
 import { useState } from "react";
 import PlatformSelector from "./components/game-card/PlatformSelector";
-import { IPlatform } from "./hooks/useGames";
 import SortSelector from "./components/game-card/SortSelector";
 import GameHeading from "./components/game-card/GameHeading";
 import { IGenre } from "./services/genreService";
+import { IPlatform } from "./services/platformService";
 
 export interface IGameQuery {
   genre: IGenre | null;

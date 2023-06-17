@@ -1,4 +1,3 @@
-import { IFetchResponse } from "../hooks/useData";
 import APIClient from "./apiClient";
 import { CACHE_KEY_PLATFORMS } from "./constants";
 
