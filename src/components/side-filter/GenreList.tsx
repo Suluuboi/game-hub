@@ -1,24 +1,18 @@
-import { HStack, List, ListItem } from "@chakra-ui/layout";
-import useGenres from "../../hooks/useGenres";
-import { Image } from "@chakra-ui/image";
-import getCropedImageUrl from "../../services/image-url";
-import { Spinner } from "@chakra-ui/spinner";
 import { Button } from "@chakra-ui/button";
+import { Image } from "@chakra-ui/image";
+import { HStack, List, ListItem } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react";
-import genreDummyData from "./genre-dummy-data";
+import { Spinner } from "@chakra-ui/spinner";
+import useGenres from "../../hooks/useGenres";
 import { IGenre } from "../../services/genreService";
+import getCropedImageUrl from "../../services/image-url";
 
 interface Props {
-  onSelectGenre: (genre: IGenre) => void;
-  selectedGenre: IGenre | null;
+  onSelectGenre: (genreID?: number) => void;
+  selectedGenreID?: number;
 }
 
-export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
-  /*const {
-    data: genres,
-    error,
-    loading,
-  } = { data: genreDummyData.genre_dummy.results, loading: false, error: null };*/
+export default function GenreList({ onSelectGenre, selectedGenreID }: Props) {
   const { data: genres, error, isLoading: loading } = useGenres();
 
   return (
@@ -39,12 +33,12 @@ export default function GenreList({ onSelectGenre, selectedGenre }: Props) {
                 borderRadius={8}
               />
               <Button
-                fontWeight={g.id === selectedGenre?.id ? "bold" : "normal"}
+                fontWeight={g.id === selectedGenreID ? "bold" : "normal"}
                 whiteSpace={"normal"}
                 textAlign={"left"}
                 variant={"link"}
                 fontSize={"lg"}
-                onClick={() => onSelectGenre(g)}
+                onClick={() => onSelectGenre(g.id)}
               >
                 {g.name}
               </Button>

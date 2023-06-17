@@ -10,7 +10,7 @@ function useGames(gameQury: IGameQuery) {
     queryFn: ({ pageParam = 1 }) =>
       gameService.getAll({
         params: {
-          genres: gameQury.genre?.id,
+          genres: gameQury.genreID,
           parent_platforms: gameQury.platform?.id,
           ordering: gameQury.sortOrder,
           search: gameQury.search,

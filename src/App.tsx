@@ -10,7 +10,7 @@ import { IGenre } from "./services/genreService";
 import { IPlatform } from "./services/platformService";
 
 export interface IGameQuery {
-  genre: IGenre | null;
+  genreID?: number;
   platform: IPlatform | null;
   sortOrder: string;
   search: string;
@@ -32,8 +32,10 @@ function App() {
       <Show above={"lg"}>
         <GridItem area={"aside"} padding={5}>
           <GenreList
-            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-            selectedGenre={gameQuery.genre}
+            onSelectGenre={(genre) =>
+              setGameQuery({ ...gameQuery, genreID: genre })
+            }
+            selectedGenreID={gameQuery.genreID}
           />
         </GridItem>
       </Show>

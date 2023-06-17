@@ -1,8 +1,7 @@
-import { Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import useDebouncedInput from "../../hooks/useDebounce";
 
 interface Props {
   onSearch: (search: string) => void;
