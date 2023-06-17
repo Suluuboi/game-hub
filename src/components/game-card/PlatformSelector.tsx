@@ -6,15 +6,19 @@ import { Spinner } from "@chakra-ui/spinner";
 import { IPlatform } from "../../services/platformService";
 
 interface Props {
-  onPlatformSelected: (platform: IPlatform) => void;
-  selectedPlatform: IPlatform | null;
+  onPlatformIdSelected: (platformId: number) => void;
+  selectedPlatformID?: number;
 }
 
 export default function PlatformSelector({
-  onPlatformSelected,
-  selectedPlatform,
+  onPlatformIdSelected,
+  selectedPlatformID,
 }: Props) {
   const { data: platforms, error, isLoading: loading } = usePlatform();
+
+  const platformName = platforms.results.find(
+    (platform) => platform.id === selectedPlatformID
+  )?.name;
 
   return (
     <>
@@ -22,13 +26,13 @@ export default function PlatformSelector({
       {loading && <Spinner />}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          {selectedPlatform ? selectedPlatform.name : "Platforms"}
+          {selectedPlatformID ? platformName : "Platforms"}
         </MenuButton>
         <MenuList>
           {platforms?.results.map((platform) => (
             <MenuItem
               key={platform.id}
-              onClick={() => onPlatformSelected(platform)}
+              onClick={() => onPlatformIdSelected(platform.id)}
             >
               {platform.name}
             </MenuItem>

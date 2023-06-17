@@ -11,7 +11,7 @@ function useGames(gameQury: IGameQuery) {
       gameService.getAll({
         params: {
           genres: gameQury.genreID,
-          parent_platforms: gameQury.platform?.id,
+          parent_platforms: gameQury.platformID,
           ordering: gameQury.sortOrder,
           search: gameQury.search,
           page: pageParam,
