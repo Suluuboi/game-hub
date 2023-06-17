@@ -4,6 +4,7 @@ import { BsChevronDown } from "react-icons/bs";
 import usePlatform from "../../hooks/usePlatforms";
 import { Spinner } from "@chakra-ui/spinner";
 import { IPlatform } from "../../services/platformService";
+import useGetPlatformName from "../../hooks/useGetPlatformName";
 
 interface Props {
   onPlatformIdSelected: (platformId: number) => void;
@@ -16,9 +17,7 @@ export default function PlatformSelector({
 }: Props) {
   const { data: platforms, error, isLoading: loading } = usePlatform();
 
-  const platformName = platforms.results.find(
-    (platform) => platform.id === selectedPlatformID
-  )?.name;
+  const platformName = useGetPlatformName(selectedPlatformID);
 
   return (
     <>
