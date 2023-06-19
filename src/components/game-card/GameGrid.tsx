@@ -8,14 +8,14 @@ import GameCardSkeleton from "../game-card/GameCardSkeleton";
 import GameCards from "../game-card/GameCards";
 
 export default function GameGrid() {
-  const { gameQuery } = useGameQueryStore();
+  
   const {
     data: games,
     error,
     isLoading: loading,
     hasNextPage,
     fetchNextPage,
-  } = useGames(gameQuery);
+  } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   if (error) return <Text>{error.message}</Text>;

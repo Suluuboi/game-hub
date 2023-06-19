@@ -4,9 +4,11 @@ import useGetPlatformName from "../../hooks/useGetPlatformName";
 import useGameQueryStore from "../../store";
 
 export default function GameHeading() {
-  const { gameQuery } = useGameQueryStore();
-  const genreName = useGetGenreName(gameQuery.genreID);
-  const platformName = useGetPlatformName(gameQuery.platformID);
+  const genreID = useGameQueryStore((s) => s.gameQuery.genreID);
+  const genreName = useGetGenreName(genreID);
+
+  const platformID = useGameQueryStore((s) => s.gameQuery.platformID);
+  const platformName = useGetPlatformName(platformID);
 
   const heading = `${platformName} ${genreName} Games`;
 

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { mountStoreDevtool } from "simple-zustand-devtools";
 
-export interface IGameQuery {
+interface IGameQuery {
   genreID?: number;
   platformID?: number;
   sortOrder?: string;

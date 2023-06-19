@@ -4,13 +4,13 @@ import { HStack, List, ListItem } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 import useGenres from "../../hooks/useGenres";
-import { IGenre } from "../../services/genreService";
 import getCropedImageUrl from "../../services/image-url";
 import useGameQueryStore from "../../store";
 
 export default function GenreList() {
   const { data: genres, error, isLoading: loading } = useGenres();
-  const { gameQuery, setGenreId } = useGameQueryStore();
+  const genreID = useGameQueryStore((s) => s.gameQuery.genreID);
+  const setGenreId = useGameQueryStore((s) => s.setGenreId);
 
   return (
     <>
@@ -30,7 +30,7 @@ export default function GenreList() {
                 borderRadius={8}
               />
               <Button
-                fontWeight={g.id === gameQuery.genreID ? "bold" : "normal"}
+                fontWeight={g.id === genreID ? "bold" : "normal"}
                 whiteSpace={"normal"}
                 textAlign={"left"}
                 variant={"link"}

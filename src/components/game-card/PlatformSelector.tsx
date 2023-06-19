@@ -1,17 +1,17 @@
 import { Button } from "@chakra-ui/button";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
-import { BsChevronDown } from "react-icons/bs";
-import usePlatform from "../../hooks/usePlatforms";
 import { Spinner } from "@chakra-ui/spinner";
-import { IPlatform } from "../../services/platformService";
+import { BsChevronDown } from "react-icons/bs";
 import useGetPlatformName from "../../hooks/useGetPlatformName";
+import usePlatform from "../../hooks/usePlatforms";
 import useGameQueryStore from "../../store";
 
 export default function PlatformSelector() {
   const { data: platforms, error, isLoading: loading } = usePlatform();
-  const { gameQuery, setPlatformId } = useGameQueryStore();
+  const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
 
-  const platformName = useGetPlatformName(gameQuery.platformID);
+  const platformID = useGameQueryStore((s) => s.gameQuery.platformID);
+  const platformName = useGetPlatformName(platformID);
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function PlatformSelector() {
       {loading && <Spinner />}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          {gameQuery.platformID ? platformName : "Platforms"}
+          {platformID ? platformName : "Platforms"}
         </MenuButton>
         <MenuList>
           {platforms?.results.map((platform) => (

@@ -7,8 +7,7 @@ import useGameQueryStore from "../../store";
 export default function SearchInput() {
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 1000);
-  const { gameQuery, setSearchText, setGenreId, setPlatformId, setSortOrder } =
-    useGameQueryStore();
+  const setSearchText = useGameQueryStore((s) => s.setSearchText);
 
   useEffect(() => {
     setSearchText(debounced);

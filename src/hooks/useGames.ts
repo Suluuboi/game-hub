@@ -1,19 +1,20 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import gameService, { IGame } from "../services/gameServices";
-import { CACHE_KEY_GAMES } from "../services/constants";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { IFetchResponse } from "../services/apiClient";
-import { IGameQuery } from "../store";
+import { CACHE_KEY_GAMES } from "../services/constants";
+import gameService, { IGame } from "../services/gameServices";
+import useGameQueryStore from "../store";
 
-function useGames(gameQury: IGameQuery) {
+function useGames() {
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
   return useInfiniteQuery<IFetchResponse<IGame>, Error>({
-    queryKey: [CACHE_KEY_GAMES, gameQury],
+    queryKey: [CACHE_KEY_GAMES, gameQuery],
     queryFn: ({ pageParam = 1 }) =>
       gameService.getAll({
         params: {
-          genres: gameQury.genreID,
-          parent_platforms: gameQury.platformID,
-          ordering: gameQury.sortOrder,
-          search: gameQury.search,
+          genres: gameQuery.genreID,
+          parent_platforms: gameQuery.platformID,
+          ordering: gameQuery.sortOrder,
+          search: gameQuery.search,
           page: pageParam,
         },
       }),
