@@ -1,8 +1,8 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { IGameQuery } from "../App";
 import gameService, { IGame } from "../services/gameServices";
 import { CACHE_KEY_GAMES } from "../services/constants";
 import { IFetchResponse } from "../services/apiClient";
+import { IGameQuery } from "../store";
 
 function useGames(gameQury: IGameQuery) {
   return useInfiniteQuery<IFetchResponse<IGame>, Error>({

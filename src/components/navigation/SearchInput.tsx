@@ -2,17 +2,16 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  onSearch: (search: string) => void;
-}
-
-export default function SearchInput({ onSearch }: Props) {
+export default function SearchInput() {
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 1000);
+  const { gameQuery, setSearchText, setGenreId, setPlatformId, setSortOrder } =
+    useGameQueryStore();
 
   useEffect(() => {
-    onSearch(debounced);
+    setSearchText(debounced);
   }, [debounced]);
 
   return (

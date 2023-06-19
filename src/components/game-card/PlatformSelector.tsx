@@ -5,19 +5,13 @@ import usePlatform from "../../hooks/usePlatforms";
 import { Spinner } from "@chakra-ui/spinner";
 import { IPlatform } from "../../services/platformService";
 import useGetPlatformName from "../../hooks/useGetPlatformName";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  onPlatformIdSelected: (platformId: number) => void;
-  selectedPlatformID?: number;
-}
-
-export default function PlatformSelector({
-  onPlatformIdSelected,
-  selectedPlatformID,
-}: Props) {
+export default function PlatformSelector() {
   const { data: platforms, error, isLoading: loading } = usePlatform();
+  const { gameQuery, setPlatformId } = useGameQueryStore();
 
-  const platformName = useGetPlatformName(selectedPlatformID);
+  const platformName = useGetPlatformName(gameQuery.platformID);
 
   return (
     <>
@@ -25,13 +19,13 @@ export default function PlatformSelector({
       {loading && <Spinner />}
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          {selectedPlatformID ? platformName : "Platforms"}
+          {gameQuery.platformID ? platformName : "Platforms"}
         </MenuButton>
         <MenuList>
           {platforms?.results.map((platform) => (
             <MenuItem
               key={platform.id}
-              onClick={() => onPlatformIdSelected(platform.id)}
+              onClick={() => setPlatformId(platform.id)}
             >
               {platform.name}
             </MenuItem>
