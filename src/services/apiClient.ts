@@ -6,6 +6,8 @@ export interface IFetchResponse<T> {
   results: T[];
 }
 
+
+
 const axiosInstance = axios.create({
   baseURL: "https://api.rawg.io/api/",
   params: {
@@ -25,6 +27,11 @@ class APIClient<T> {
       this.endpoint,
       config
     );
+    return res.data;
+  };
+
+  get = async (id: number | string) => {
+    const res = await axiosInstance.get<T>(this.endpoint + `/${id}`);
     return res.data;
   };
 

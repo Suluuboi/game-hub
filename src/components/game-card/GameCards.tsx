@@ -4,6 +4,7 @@ import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import getCropedImageUrl from "../../services/image-url";
 import { IGame } from "../../services/gameServices";
+import { Link } from "react-router-dom";
 
 interface Props {
   game: IGame;
@@ -15,7 +16,7 @@ export default function GameCards({ game }: Props) {
       <Image src={getCropedImageUrl(game.background_image)} />
       <CardBody>
         <Heading fontSize={"2xl"} marginBottom={2}>
-          {game.name}
+          <Link to={`/games/` + game.slug}>{game.name}</Link>
         </Heading>
         <HStack justifyContent={"space-between"}>
           <PlatformIconList
