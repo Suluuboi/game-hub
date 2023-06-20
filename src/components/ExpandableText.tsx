@@ -15,7 +15,7 @@ export default function ExpandableText({ children }: Props) {
 
   return (
     <Text>
-      {expand ? `${summary}...` : children}
+      {!expand ? `${summary}...` : children}
       <Button
         size={"xs"}
         fontWeight={"bold"}

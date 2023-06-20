@@ -3,6 +3,7 @@ import { useDebouncedValue } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import useGameQueryStore from "../../store";
+import { useLocation, useNavigate, useNavigation } from "react-router-dom";
 
 export default function SearchInput() {
   const [value, setValue] = useState("");
@@ -13,6 +14,10 @@ export default function SearchInput() {
     setSearchText(debounced);
   }, [debounced]);
 
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  console.log(location);
   return (
     <>
       <InputGroup>
@@ -21,9 +26,16 @@ export default function SearchInput() {
           borderRadius={20}
           placeholder="Search games..."
           value={value}
-          onChange={(event) => setValue(event.currentTarget.value)}
+          onChange={(event) => {
+            if (pathname !== "/") navigate("/");
+            seachData(event);
+          }}
         />
       </InputGroup>
     </>
   );
+
+  function seachData(event: React.ChangeEvent<HTMLInputElement>) {
+    setValue(event.currentTarget.value);
+  }
 }
