@@ -33,6 +33,6 @@ const useGameQueryStore = create<IGameQueryStore>((set) => ({
 }));
 
 if (process.env.NODE_ENV === "development")
-  mountStoreDevtool("Counter Store", useGameQueryStore);
+  mountStoreDevtool("Game Query Store", useGameQueryStore);
 
 export default useGameQueryStore;
